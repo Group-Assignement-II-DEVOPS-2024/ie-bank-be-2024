@@ -19,13 +19,12 @@ elif os.getenv('ENV') == 'uat':
     print("Running in uat mode")
     app.config.from_object('config.UatConfig')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('DBUSER')}:{os.getenv('DBPASS')}@{os.getenv('DBHOST')}/{os.getenv('DBNAME')}"
-
 db = SQLAlchemy(app)
 
 from iebank_api.models import Account
-with app.app_context():
-    db.create_all()
+if os.getenv('ENV') != 'ghci': 
+    with app.app_context():
+        db.create_all()
 
 CORS(app)
 
