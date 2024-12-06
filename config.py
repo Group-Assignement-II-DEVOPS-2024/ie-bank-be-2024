@@ -14,7 +14,7 @@ class GithubCIConfig(Config):
    DEBUG = True
 
 class DevelopmentConfig(Config):
-   SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
+   SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}?sslmode=require'.format(
        dbuser=os.getenv('DBUSER'),
        dbpass=os.getenv('DBPASS'), 
        dbhost=os.getenv('DBHOST'),
